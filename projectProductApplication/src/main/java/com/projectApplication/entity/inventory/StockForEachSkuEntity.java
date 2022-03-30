@@ -1,12 +1,15 @@
 package com.projectApplication.entity.inventory;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @AllArgsConstructor
@@ -14,8 +17,11 @@ import javax.persistence.Id;
 @ToString
 
 @Entity
-
-public class UpdateStock {
+@Table(name="stock_for_eachSku")
+public class StockForEachSkuEntity {
     @Id
-    private String update;
+    @Column(name = "Sku_Code")
+    private String skuCode;
+    @Column(name="Quantity_Available")
+    private int quantityAvailable;
 }

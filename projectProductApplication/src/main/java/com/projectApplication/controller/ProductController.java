@@ -1,5 +1,7 @@
 package com.projectApplication.controller;
 
+import com.projectApplication.entity.product.PriceForEachSKUEntity;
+import com.projectApplication.entity.product.ProductSkuEntity;
 import com.projectApplication.entity.product.ProductsEntity;
 import com.projectApplication.service.productService.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +19,19 @@ public class ProductController {
 
 
     @PostMapping("/addDetails")
-    public void addDetails(ProductsEntity productsEntity) {
+    public void addDetails(ProductsEntity productsEntity, ProductSkuEntity productSkuEntity,
+                           PriceForEachSKUEntity priceForEachSKUEntity) {
+
+        productService.addProductDetails(productsEntity, productSkuEntity, priceForEachSKUEntity);
+    }
+
+
+  /*  @PostMapping("/product")
+        public void addDetails(ProductsEntity productsEntity){
         productService.addProductDetails(productsEntity);
-    }
+           productService.addProductSkuEntity(productSkuEntity);
+          productService.addPriceForEachSKUDetails(priceForEachSKUEntity);
 
-    @GetMapping("/get")
-    public Iterable<ProductsEntity> getDetail() {
-        return productService.getDetails();
     }
-
+*/
 }
