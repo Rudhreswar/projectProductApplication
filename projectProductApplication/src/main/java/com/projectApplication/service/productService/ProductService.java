@@ -1,43 +1,66 @@
 package com.projectApplication.service.productService;
 
 
-import com.projectApplication.entity.product.ProductsAPIEntity;
+import com.projectApplication.entity.product.PriceForEachSKUEntity;
+import com.projectApplication.entity.product.ProductSkuEntity;
+import com.projectApplication.entity.product.ProductsEntity;
 import com.projectApplication.repository.productRepositortory.PriceForEachSKUEntityRepository;
-import com.projectApplication.repository.productRepositortory.ProductSkuAPIEntityRepository;
-import com.projectApplication.repository.productRepositortory.ProductsAPIEntityRepository;
+import com.projectApplication.repository.productRepositortory.ProductSkuEntityRepository;
+import com.projectApplication.repository.productRepositortory.ProductsEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.LinkedList;
 
 @Service
 public class ProductService {
 
     @Autowired
-    private ProductSkuAPIEntityRepository productSkuAPIEntityRepository;
+    private ProductSkuEntityRepository productSkuEntityRepository;
     @Autowired
     private PriceForEachSKUEntityRepository priceForEachSKUEntityRepository;
     @Autowired
-    private ProductsAPIEntityRepository productsAPIEntityRepository;
+    private ProductsEntityRepository productsEntityRepository;
 
 
-    // Adding Products Api Entity....................
+    // Adding Product Details.........................
 
+    public void addProductDetails(ProductsEntity productsEntity) {
 
-    public void adddetails(ProductsAPIEntity productsAPIEntity) {
+        ProductsEntity productsAPIEntitiesObj = new ProductsEntity();
+        productsAPIEntitiesObj.setProductCode(productsEntity.getProductCode());
+        productsAPIEntitiesObj.setProductName(productsEntity.getProductName());
+        productsAPIEntitiesObj.setDescription(productsEntity.getDescription());
 
+        productsEntityRepository.save(productsAPIEntitiesObj);
+    }
 
-     //   LinkedList<ProductsAPIEntity> productsAPIEntityLinkedList = new LinkedList<>();
+    // Adding Price details for each Sku..........................................................
 
-        ProductsAPIEntity productsAPIEntitiesObj = new ProductsAPIEntity();
-        productsAPIEntitiesObj.setProductCode(productsAPIEntity.getProductCode());
-        productsAPIEntitiesObj.setProductName(productsAPIEntity.getProductName());
-        productsAPIEntitiesObj.setDescription(productsAPIEntity.getDescription());
-        productsAPIEntitiesObj.setProductSkuAPIEntities(productsAPIEntity.getProductSkuAPIEntities());
-        productsAPIEntitiesObj.setPriceForEachSKUEntities(productsAPIEntity.getPriceForEachSKUEntities());
+    public void addPriceForEachSKUDetails(PriceForEachSKUEntity priceForEachSKUEntity) {
+        PriceForEachSKUEntity priceForEachSKUEntityObj = new PriceForEachSKUEntity();
+        priceForEachSKUEntityObj.setSkuCode(priceForEachSKUEntity.getSkuCode());
+        priceForEachSKUEntityObj.setPrice(priceForEachSKUEntity.getPrice());
 
-        productsAPIEntityRepository.save(productsAPIEntitiesObj);
-
+        //Saving the details into the repository......................
+        priceForEachSKUEntityRepository.save(priceForEachSKUEntity);
 
     }
+
+    // Adding Products Skus ..................................
+    public void addProductSkuEntity(ProductSkuEntity productSkuEntity) {
+        ProductSkuEntity productSkuEntityObj = new ProductSkuEntity();
+        productSkuEntityObj.setProductCode(productSkuEntity.getProductCode());
+        productSkuEntityObj.setSkuCode(productSkuEntity.getSkuCode());
+        productSkuEntityObj.setSize(productSkuEntity.getSize());
+
+        //Saving the details into the repository......................
+        productSkuEntityRepository.save(productSkuEntity);
+    }
+
+    // Getting all details of Product details...........................
+
+    public Iterable<ProductsEntity> getDetails() {
+        return productsEntityRepository.findAll();
+    }
+
+
 }
