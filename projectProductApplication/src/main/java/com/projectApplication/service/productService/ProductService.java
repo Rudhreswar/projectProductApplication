@@ -24,7 +24,8 @@ public class ProductService {
     private ProductsEntityRepository productsEntityRepository;
 
 
-    // Adding Product Details.........................
+    // Adding Product Details........................
+
 
     public void addProductDetails(ProductsEntity productsEntity, ProductSkuEntity productSkuEntity
             , PriceForEachSKUEntity priceForEachSKUEntity) {
@@ -62,8 +63,8 @@ public class ProductService {
 
 
     }
+// ----------------------------------------------------------------------------------------------------------------------------
 
-/*
     public void addProductDetails(ProductsEntity productsEntity) {
 
         ProductsEntity productsAPIEntitiesObj = new ProductsEntity();
@@ -76,37 +77,39 @@ public class ProductService {
 
         productsEntityRepository.save(productsAPIEntitiesObj);
 
+    }
 
-        // Adding Products Skus ..................................
-        public void addProductSkuEntity (ProductSkuEntity productSkuEntity){
-            ProductSkuEntity productSkuEntityObj = new ProductSkuEntity();
-            productSkuEntityObj.setProductCode(productSkuEntity.getProductCode());
-            productSkuEntityObj.setSkuCode(productSkuEntity.getSkuCode());
-            productSkuEntityObj.setSize(productSkuEntity.getSize());
+    // Adding Products Skus ..................................
+    public void addProductSkuEntity(ProductSkuEntity productSkuEntity) {
+        ProductSkuEntity productSkuEntityObj = new ProductSkuEntity();
+        productSkuEntityObj.setProductCode(productSkuEntity.getProductCode());
+        productSkuEntityObj.setSkuCode(productSkuEntity.getSkuCode());
+        productSkuEntityObj.setSize(productSkuEntity.getSize());
 
-            //Saving the details into the repository......................
-            productSkuEntityRepository.save(productSkuEntity);
-        }
+        //Saving the details into the repository......................
+        productSkuEntityRepository.save(productSkuEntity);
+    }
 
-        // Adding Price details for each Sku..........................................................
+    // Adding Price details for each Sku..........................................................
 
-        public void addPriceForEachSKUDetails (PriceForEachSKUEntity priceForEachSKUEntity){
+    public void addPriceForEachSKUDetails(PriceForEachSKUEntity priceForEachSKUEntity) {
 
-            PriceForEachSKUEntity priceForEachSKUEntityObj = new PriceForEachSKUEntity();
-            priceForEachSKUEntityObj.setSkuCode(priceForEachSKUEntity.getSkuCode());
-            priceForEachSKUEntityObj.setPrice(priceForEachSKUEntity.getPrice());
+        PriceForEachSKUEntity priceForEachSKUEntityObj = new PriceForEachSKUEntity();
+        priceForEachSKUEntityObj.setSkuCode(priceForEachSKUEntity.getSkuCode());
+        priceForEachSKUEntityObj.setPrice(priceForEachSKUEntity.getPrice());
 
-            //Saving the details into the repository......................
-            priceForEachSKUEntityRepository.save(priceForEachSKUEntity);
-
-        }
-*/
-        // Getting all details of Product details...........................
-        public Iterable<ProductsEntity> getDetails () {
-            return productsEntityRepository.findAll();
-        }
-
-        // Getting All Details of ProductSku details .....................
-
+        //Saving the details into the repository......................
+        priceForEachSKUEntityRepository.save(priceForEachSKUEntity);
 
     }
+
+
+    // Getting all details of Product details...........................
+    public Iterable<ProductsEntity> getDetails() {
+        return productsEntityRepository.findAll();
+    }
+
+    // Getting All Details of ProductSku details .....................
+
+
+}

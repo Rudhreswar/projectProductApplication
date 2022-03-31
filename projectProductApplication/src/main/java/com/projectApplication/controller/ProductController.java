@@ -17,21 +17,29 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-
-    @PostMapping("/addDetails")
+//Adding Complete Details..........................................
+    @PostMapping("/addTotalProDetails")
     public void addDetails(ProductsEntity productsEntity, ProductSkuEntity productSkuEntity,
                            PriceForEachSKUEntity priceForEachSKUEntity) {
 
         productService.addProductDetails(productsEntity, productSkuEntity, priceForEachSKUEntity);
     }
 
-
-  /*  @PostMapping("/product")
-        public void addDetails(ProductsEntity productsEntity){
+//------------------------------------------------------------------------------------------------------------------
+    @PostMapping("/product")
+    public void addDetails(ProductsEntity productsEntity) {
         productService.addProductDetails(productsEntity);
-           productService.addProductSkuEntity(productSkuEntity);
-          productService.addPriceForEachSKUDetails(priceForEachSKUEntity);
 
     }
-*/
+
+    @PostMapping("/productSku")
+    public void addDetailsSku(ProductSkuEntity productSkuEntity) {
+        productService.addProductSkuEntity(productSkuEntity);
+    }
+
+    @PostMapping("/productPrice")
+    public void addPriceDetails(PriceForEachSKUEntity priceForEachSKUEntity) {
+        productService.addPriceForEachSKUDetails(priceForEachSKUEntity);
+    }
+//--------------------------------------------------------------------------------------------------------------------
 }

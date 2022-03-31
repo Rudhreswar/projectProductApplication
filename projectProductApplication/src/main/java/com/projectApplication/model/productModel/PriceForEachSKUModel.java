@@ -19,5 +19,5 @@ public class PriceForEachSKUModel {
     @Id
     private long skuCode;
     private double price;
-    //cart-->cartId,OrderCode,proSkucode,quantity,orderStatus
+
 }
