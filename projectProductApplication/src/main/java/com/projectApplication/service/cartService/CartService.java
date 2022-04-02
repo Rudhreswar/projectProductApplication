@@ -142,11 +142,11 @@ public class CartService {
                 Optional<ProductSkuEntity> productSkuEntityOptional = productSkuEntityRepository.findById(skuCode);
 
                 return "Ordered Successfully Placed";
+            } else {
+                return "Required Quantity is not Available ";
             }
-            return "Out OF Stock ";
         }
-
-        return "This Item is not Exist  ";
+        return "Out of Stock ";
     }
 
     // Get OrderStatus.........................................................................
