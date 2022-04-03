@@ -4,8 +4,8 @@ import com.projectApplication.entity.cart.CartEntity;
 import com.projectApplication.entity.inventory.StockSkuEntity;
 import com.projectApplication.entity.order.OrderEntity;
 import com.projectApplication.entity.product.ProductSkuEntity;
-import com.projectApplication.model.cartModel.CartModel;
-import com.projectApplication.model.orderModel.OrderModel;
+import com.projectApplication.dto.cartDataTransfer.CartDto;
+import com.projectApplication.dto.orderDataTransfer.OrderDto;
 import com.projectApplication.repository.InventoryRepository.StockSkuEntityRepository;
 import com.projectApplication.repository.cartRepository.CartRepository;
 import com.projectApplication.repository.orderRepository.OrderRepository;
@@ -60,43 +60,43 @@ public class CartService {
 
     //   API to view cart........................................................................
 
-    public List<CartModel> viewCart() {
+    public List<CartDto> viewCart() {
 
         List<CartEntity> cartEntityList = cartRepository.findAll();
 
         double[] total = {0.0};
-        List<CartModel> cartModelList = cartEntityList.stream().map(cart -> {
+        List<CartDto> cartDtoList = cartEntityList.stream().map(cart -> {
 
             //Total Amount for selected Items....................................................
             total[0] += cart.getQuantity() * cart.getProductSkuEntityCart().getProductSkuEntity().getPrice();
 
             //Generating complete details ........................................................
 
-            CartModel cartModelObj = new CartModel();
+            CartDto cartDtoObj = new CartDto();
 
-            cartModelObj.setProductCode(cart.getProductSkuEntityCart()
+            cartDtoObj.setProductCode(cart.getProductSkuEntityCart()
                     .getProductsEntitySku()
                     .getProductCode());
-            cartModelObj.setProductName(cart.getProductSkuEntityCart()
+            cartDtoObj.setProductName(cart.getProductSkuEntityCart()
                     .getProductsEntitySku()
                     .getProductName());
-            cartModelObj.setDescription(cart.getProductSkuEntityCart()
+            cartDtoObj.setDescription(cart.getProductSkuEntityCart()
                     .getProductsEntitySku()
                     .getDescription());
-            cartModelObj.setSkuCode(cart.getSkuCode());
-            cartModelObj.setSize(cart.getProductSkuEntityCart().getSize());
-            cartModelObj.setOrderCode(cart.getCartCode());
-            cartModelObj.setPrice(cart.getProductSkuEntityCart()
+            cartDtoObj.setSkuCode(cart.getSkuCode());
+            cartDtoObj.setSize(cart.getProductSkuEntityCart().getSize());
+            cartDtoObj.setOrderCode(cart.getCartCode());
+            cartDtoObj.setPrice(cart.getProductSkuEntityCart()
                     .getProductSkuEntity()
                     .getPrice());
-            cartModelObj.setQuantity(cart.getQuantity());
-            cartModelObj.setTotal(total[0]);
+            cartDtoObj.setQuantity(cart.getQuantity());
+            cartDtoObj.setTotal(total[0]);
 
 
-            return cartModelObj;
+            return cartDtoObj;
         }).collect(Collectors.toList());
 
-        return cartModelList;
+        return cartDtoList;
     }
 //---------------------------------------------------------------------------------------------------------------------------
 
@@ -151,39 +151,39 @@ public class CartService {
 
     // Get OrderStatus.........................................................................
 
-    public OrderModel getOrderStatusDetails(Long orderCode) {
+    public OrderDto getOrderStatusDetails(Long orderCode) {
 
         Optional<OrderEntity> optionalOrderEntity = orderRepository.findById(orderCode);
 
         if (optionalOrderEntity.isPresent()) {
-            OrderModel orderModel = new OrderModel();
-            orderModel.setProductCode(optionalOrderEntity.get().getOrderCode());
-            orderModel.setProductName(optionalOrderEntity.get()
+            OrderDto orderDto = new OrderDto();
+            orderDto.setProductCode(optionalOrderEntity.get().getOrderCode());
+            orderDto.setProductName(optionalOrderEntity.get()
                     .getStockSkuEntityOrder()
                     .getProductSkuEntityInStock()
                     .getProductsEntitySku()
                     .getProductName());
-            orderModel.setOrderCode(optionalOrderEntity.get().getOrderCode());
-            orderModel.setDescription(optionalOrderEntity.get()
+            orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
+            orderDto.setDescription(optionalOrderEntity.get()
                     .getStockSkuEntityOrder()
                     .getProductSkuEntityInStock()
                     .getProductsEntitySku()
                     .getDescription());
-            orderModel.setSkuCode(optionalOrderEntity.get()
+            orderDto.setSkuCode(optionalOrderEntity.get()
                     .getStockSkuEntityOrder()
                     .getSkuCode());
-            orderModel.setOrderCode(optionalOrderEntity.get()
+            orderDto.setOrderCode(optionalOrderEntity.get()
                     .getOrderCode());
-            orderModel.setPrice(optionalOrderEntity.get()
+            orderDto.setPrice(optionalOrderEntity.get()
                     .getStockSkuEntityOrder()
                     .getProductSkuEntityInStock()
                     .getProductSkuEntity()
                     .getPrice());
 
-            orderModel.setQuantity(optionalOrderEntity.get().getQuantity());
+            orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
 
 
-            return orderModel;
+            return orderDto;
 
         }
 

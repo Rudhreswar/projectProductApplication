@@ -1,0 +1,22 @@
+package com.projectApplication.controller;
+
+import com.projectApplication.service.inventoryService.InventoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class InventoryController {
+    @Autowired
+    private InventoryService inventoryService;
+
+    //Adding stock (Inventory) details..................................................
+
+    @RequestMapping(value = "/addStock/{skuCode},{quantity}", method = RequestMethod.POST)
+    public void addStockDetails(@PathVariable("skuCode") Long skuCode, @PathVariable("quantity") Long quantity) {
+
+        inventoryService.addingStockValues(skuCode, quantity);
+    }
+}

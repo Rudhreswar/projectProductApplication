@@ -1,4 +1,4 @@
-package com.projectApplication.model.cartModel;
+package com.projectApplication.dto.cartDataTransfer;
 
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -6,7 +6,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class CartModel {
+public class CartDto {
     private Long productCode;
     private String productName;
     private String description;
@@ -18,9 +18,9 @@ public class CartModel {
     private double total;
 
     // Constructor....................................................
-    public CartModel(Long productCode, String productName,
-                     String description, Long skuCode, String size,
-                     Long orderCode, double price, Long quantity, double total) {
+    public CartDto(Long productCode, String productName,
+                   String description, Long skuCode, String size,
+                   Long orderCode, double price, Long quantity, double total) {
         this.productCode = productCode;
         this.productName = productName;
         this.description = description;

@@ -2,7 +2,7 @@ package com.projectApplication.service.fulfilmentService;
 
 import com.projectApplication.entity.fulfilment.*;
 import com.projectApplication.entity.order.OrderEntity;
-import com.projectApplication.model.orderModel.OrderModel;
+import com.projectApplication.dto.orderDataTransfer.OrderDto;
 import com.projectApplication.repository.fulfilmentRepository.*;
 import com.projectApplication.repository.orderRepository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +42,10 @@ public class FulfilmentService {
                 orderRepository.save(optionalOrderEntity.get());
                 ProcessingEntity processingEntityObj = new ProcessingEntity();
                 productionEntityRepository.save(processingEntityObj);
-                OrderModel orderModel = new OrderModel();
-                orderModel.setQuantity(optionalOrderEntity.get().getQuantity());
-                orderModel.setOrderCode(optionalOrderEntity.get().getOrderCode());
-                orderModel.setPrice(optionalOrderEntity.get().getCartEntityOrder()
+                OrderDto orderDto = new OrderDto();
+                orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
+                orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
+                orderDto.setPrice(optionalOrderEntity.get().getCartEntityOrder()
                         .getProductSkuEntityCart()
                         .getCartEntityInSku()
                         .getProductSkuEntityCart()
@@ -53,18 +53,18 @@ public class FulfilmentService {
                         .getProductSkuEntityCart()
                         .getProductSkuEntity()
                         .getPrice());
-                orderModel.setDescription(optionalOrderEntity.get()
+                orderDto.setDescription(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getDescription());
-                orderModel.setSkuCode(optionalOrderEntity.get().getStockSkuEntityOrder().getSkuCode());
-                orderModel.setProductName(optionalOrderEntity.get()
+                orderDto.setSkuCode(optionalOrderEntity.get().getStockSkuEntityOrder().getSkuCode());
+                orderDto.setProductName(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getProductName());
-                orderModel.setProductCode(optionalOrderEntity.get()
+                orderDto.setProductCode(optionalOrderEntity.get()
                         .getCartEntityOrder()
                         .getProductSkuEntityCart()
                         .getProductsEntitySku()
@@ -91,10 +91,10 @@ public class FulfilmentService {
                 orderRepository.save(optionalOrderEntity.get());
                 PackingEntity packingEntityObj = new PackingEntity();
                 packingEntityRepository.save(packingEntityObj);
-                OrderModel orderModel = new OrderModel();
-                orderModel.setQuantity(optionalOrderEntity.get().getQuantity());
-                orderModel.setOrderCode(optionalOrderEntity.get().getOrderCode());
-                orderModel.setPrice(optionalOrderEntity.get().getCartEntityOrder()
+                OrderDto orderDto = new OrderDto();
+                orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
+                orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
+                orderDto.setPrice(optionalOrderEntity.get().getCartEntityOrder()
                         .getProductSkuEntityCart()
                         .getCartEntityInSku()
                         .getProductSkuEntityCart()
@@ -102,18 +102,18 @@ public class FulfilmentService {
                         .getProductSkuEntityCart()
                         .getProductSkuEntity()
                         .getPrice());
-                orderModel.setDescription(optionalOrderEntity.get()
+                orderDto.setDescription(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getDescription());
-                orderModel.setSkuCode(optionalOrderEntity.get().getStockSkuEntityOrder().getSkuCode());
-                orderModel.setProductName(optionalOrderEntity.get()
+                orderDto.setSkuCode(optionalOrderEntity.get().getStockSkuEntityOrder().getSkuCode());
+                orderDto.setProductName(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getProductName());
-                orderModel.setProductCode(optionalOrderEntity.get()
+                orderDto.setProductCode(optionalOrderEntity.get()
                         .getCartEntityOrder()
                         .getProductSkuEntityCart()
                         .getProductsEntitySku()
@@ -141,10 +141,10 @@ public class FulfilmentService {
                 ShippingEntity shippingEntity = new ShippingEntity();
 
                 shippingEntityRepository.save(shippingEntity);
-                OrderModel orderModel = new OrderModel();
-                orderModel.setQuantity(optionalOrderEntity.get().getQuantity());
-                orderModel.setOrderCode(optionalOrderEntity.get().getOrderCode());
-                orderModel.setPrice(optionalOrderEntity.get().getCartEntityOrder()
+                OrderDto orderDto = new OrderDto();
+                orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
+                orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
+                orderDto.setPrice(optionalOrderEntity.get().getCartEntityOrder()
                         .getProductSkuEntityCart()
                         .getCartEntityInSku()
                         .getProductSkuEntityCart()
@@ -152,18 +152,18 @@ public class FulfilmentService {
                         .getProductSkuEntityCart()
                         .getProductSkuEntity()
                         .getPrice());
-                orderModel.setDescription(optionalOrderEntity.get()
+                orderDto.setDescription(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getDescription());
-                orderModel.setSkuCode(optionalOrderEntity.get().getStockSkuEntityOrder().getSkuCode());
-                orderModel.setProductName(optionalOrderEntity.get()
+                orderDto.setSkuCode(optionalOrderEntity.get().getStockSkuEntityOrder().getSkuCode());
+                orderDto.setProductName(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getProductName());
-                orderModel.setProductCode(optionalOrderEntity.get()
+                orderDto.setProductCode(optionalOrderEntity.get()
                         .getCartEntityOrder()
                         .getProductSkuEntityCart()
                         .getProductsEntitySku()
@@ -190,10 +190,10 @@ public class FulfilmentService {
                 DeliveringEntity deliveringEntityObj = new DeliveringEntity();
 
                 deliveringEntityRepository.save(deliveringEntityObj);
-                OrderModel orderModel = new OrderModel();
-                orderModel.setQuantity(optionalOrderEntity.get().getQuantity());
-                orderModel.setOrderCode(optionalOrderEntity.get().getOrderCode());
-                orderModel.setPrice(optionalOrderEntity.get().getCartEntityOrder()
+                OrderDto orderDto = new OrderDto();
+                orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
+                orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
+                orderDto.setPrice(optionalOrderEntity.get().getCartEntityOrder()
                         .getProductSkuEntityCart()
                         .getCartEntityInSku()
                         .getProductSkuEntityCart()
@@ -201,20 +201,20 @@ public class FulfilmentService {
                         .getProductSkuEntityCart()
                         .getProductSkuEntity()
                         .getPrice());
-                orderModel.setDescription(optionalOrderEntity.get()
+                orderDto.setDescription(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getDescription());
-                orderModel.setSkuCode(optionalOrderEntity.get()
+                orderDto.setSkuCode(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getSkuCode());
-                orderModel.setProductName(optionalOrderEntity.get()
+                orderDto.setProductName(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getProductName());
-                orderModel.setProductCode(optionalOrderEntity.get()
+                orderDto.setProductCode(optionalOrderEntity.get()
                         .getCartEntityOrder()
                         .getProductSkuEntityCart()
                         .getProductsEntitySku()
@@ -241,10 +241,10 @@ public class FulfilmentService {
                 ReturningEntity returningEntityObj = new ReturningEntity();
 
                 returningEntityRepository.save(returningEntityObj);
-                OrderModel orderModel = new OrderModel();
-                orderModel.setQuantity(optionalOrderEntity.get().getQuantity());
-                orderModel.setOrderCode(optionalOrderEntity.get().getOrderCode());
-                orderModel.setPrice(optionalOrderEntity.get().getCartEntityOrder()
+                OrderDto orderDto = new OrderDto();
+                orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
+                orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
+                orderDto.setPrice(optionalOrderEntity.get().getCartEntityOrder()
                         .getProductSkuEntityCart()
                         .getCartEntityInSku()
                         .getProductSkuEntityCart()
@@ -252,20 +252,20 @@ public class FulfilmentService {
                         .getProductSkuEntityCart()
                         .getProductSkuEntity()
                         .getPrice());
-                orderModel.setDescription(optionalOrderEntity.get()
+                orderDto.setDescription(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getDescription());
-                orderModel.setSkuCode(optionalOrderEntity.get()
+                orderDto.setSkuCode(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getSkuCode());
-                orderModel.setProductName(optionalOrderEntity.get()
+                orderDto.setProductName(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getProductName());
-                orderModel.setProductCode(optionalOrderEntity.get()
+                orderDto.setProductCode(optionalOrderEntity.get()
                         .getCartEntityOrder()
                         .getProductSkuEntityCart()
                         .getProductsEntitySku()

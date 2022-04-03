@@ -1,4 +1,4 @@
-package com.projectApplication.model.orderModel;
+package com.projectApplication.dto.orderDataTransfer;
 
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -6,7 +6,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class OrderModel {
+public class OrderDto {
     private Long productCode;
     private String productName;
     private String description;
@@ -18,9 +18,9 @@ public class OrderModel {
 
 // set & get the values through Constructor..........................................
 
-    public OrderModel(Long productCode, String productName,
-                      String description, Long skuCode, String size, Long orderCode,
-                      double price, Long quantity) {
+    public OrderDto(Long productCode, String productName,
+                    String description, Long skuCode, String size, Long orderCode,
+                    double price, Long quantity) {
         this.productCode = productCode;
         this.productName = productName;
         this.description = description;

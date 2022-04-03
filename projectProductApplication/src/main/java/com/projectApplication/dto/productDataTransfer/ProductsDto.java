@@ -1,4 +1,4 @@
-package com.projectApplication.model.productModel;
+package com.projectApplication.dto.productDataTransfer;
 
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -7,7 +7,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class ProductsModel {
+public class ProductsDto {
 
     private Long productCode;
 
@@ -17,7 +17,7 @@ public class ProductsModel {
 
     // set & get the Values Through Constructor...........................
 
-    public ProductsModel(Long productCode, String productName, String description) {
+    public ProductsDto(Long productCode, String productName, String description) {
         this.productCode = productCode;
         this.productName = productName;
         this.description = description;

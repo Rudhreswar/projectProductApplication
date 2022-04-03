@@ -4,8 +4,8 @@ package com.projectApplication.service.productService;
 import com.projectApplication.entity.product.PriceForEachSkuEntity;
 import com.projectApplication.entity.product.ProductSkuEntity;
 import com.projectApplication.entity.product.ProductsEntity;
-import com.projectApplication.model.productModel.ProductSkuModel;
-import com.projectApplication.model.productModel.ProductsModel;
+import com.projectApplication.dto.productDataTransfer.ProductSkuDto;
+import com.projectApplication.dto.productDataTransfer.ProductsDto;
 import com.projectApplication.repository.productRepositortory.PriceForEachSkuEntityRepository;
 import com.projectApplication.repository.productRepositortory.ProductSkuEntityRepository;
 import com.projectApplication.repository.productRepositortory.ProductsEntityRepository;
@@ -25,16 +25,16 @@ public class ProductService {
 
 
     // Adding Product Details........................
-    public void addProduct(ProductsModel productsModel) {
+    public void addProduct(ProductsDto productsDto) {
         ProductsEntity productsEntityObj = new ProductsEntity();
-        productsEntityObj.setProductName(productsModel.getProductName());
-        productsEntityObj.setDescription(productsModel.getDescription());
+        productsEntityObj.setProductName(productsDto.getProductName());
+        productsEntityObj.setDescription(productsDto.getDescription());
 
         productsEntityRepository.save(productsEntityObj);
     }
 
     // Adding Sku details ...........................
-    public void addingSkuDetails(ProductSkuModel productSkuModel, Long productCode) {
+    public void addingSkuDetails(ProductSkuDto productSkuDto, Long productCode) {
         Optional<ProductsEntity> productsEntityOptional = productsEntityRepository.findById(productCode);
 
         if (productsEntityOptional.isPresent()) {
@@ -42,14 +42,14 @@ public class ProductService {
 
                         ProductSkuEntity productSkuEntityObj = new ProductSkuEntity();
                         productSkuEntityObj.setProductsEntitySku(product);
-                        productSkuEntityObj.setSize(productSkuModel.getSize());
+                        productSkuEntityObj.setSize(productSkuDto.getSize());
 
                         //Saving Sku data to repository.......................
                         productSkuEntityRepository.save(productSkuEntityObj);
 
                         PriceForEachSkuEntity priceForEachSkuEntityObj = new PriceForEachSkuEntity();
                         priceForEachSkuEntityObj.setProductSkuEntityPrice(productSkuEntityObj);
-                        priceForEachSkuEntityObj.setPrice(productSkuModel.getPrice());
+                        priceForEachSkuEntityObj.setPrice(productSkuDto.getPrice());
 
 
                     }

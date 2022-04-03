@@ -1,4 +1,4 @@
-package com.projectApplication.model.inventoryModel;
+package com.projectApplication.dto.inventoryDataTransfer;
 
 
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class StockSkuModel {
+public class StockSkuDto {
 
 
     private Long skuCode;

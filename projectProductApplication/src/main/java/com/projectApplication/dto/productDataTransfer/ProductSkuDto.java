@@ -1,4 +1,4 @@
-package com.projectApplication.model.productModel;
+package com.projectApplication.dto.productDataTransfer;
 
 
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class ProductSkuModel {
+public class ProductSkuDto {
 
     private Long skuCode;
     private String size;
@@ -17,7 +17,7 @@ public class ProductSkuModel {
 
     // Set & Get values  Through Constructor  ..........................................
 
-    public ProductSkuModel(Long skuCode, String size, double price) {
+    public ProductSkuDto(Long skuCode, String size, double price) {
         this.skuCode = skuCode;
         this.size = size;
         this.price = price;
