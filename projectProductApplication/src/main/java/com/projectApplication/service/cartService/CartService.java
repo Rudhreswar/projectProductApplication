@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 @Service
 public class CartService {
     @Autowired
-    private CartRepository cartRepository;
+    public CartRepository cartRepository;
     @Autowired
-    private StockSkuEntityRepository stockSkuEntityRepository;
+    public StockSkuEntityRepository stockSkuEntityRepository;
     @Autowired
-    private ProductSkuEntityRepository productSkuEntityRepository;
+    public ProductSkuEntityRepository productSkuEntityRepository;
     @Autowired
-    private OrderRepository orderRepository;
+    public OrderRepository orderRepository;
 
     // Checking the inventory is Available and If Available then Add to Cart...............................
 
