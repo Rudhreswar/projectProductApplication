@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
@@ -25,10 +26,10 @@ public class ProductController {
 
     //Adding Skus details....................................................
 
-    @RequestMapping(value = "/addSkus", method = RequestMethod.POST)
-    public void addSkuDetails(@RequestBody ProductSkuDto productSkuDto
-            , @PathVariable Long productCode) {
-        productService.addingSkuDetails(productSkuDto, productCode);
+    @RequestMapping(value = "/{productCode}/addSkus", method = RequestMethod.POST)
+    public void addSkuDetails(
+            @PathVariable("productCode") Long productCode, @RequestBody ProductSkuDto productSkuDto) {
+        productService.addingSkuDetails(productCode, productSkuDto);
     }
 
 

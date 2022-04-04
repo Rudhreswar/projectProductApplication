@@ -37,4 +37,16 @@ public class InventoryService {
 
     }
 
+    public String updateStock(Long skuCode, Long quantity) {
+        Optional<StockSkuEntity> stockSkuEntityOptional = stockSkuEntityRepository.findById(skuCode);
+
+        if (stockSkuEntityOptional.isPresent()) {
+            stockSkuEntityOptional.get().setQuantityAvailable(stockSkuEntityOptional.get().getQuantityAvailable() + quantity);
+
+            stockSkuEntityRepository.save(stockSkuEntityOptional.get());
+            return "Stock updated Successfully";
+        }
+        return "Required Sku is not Available";
+    }
+
 }

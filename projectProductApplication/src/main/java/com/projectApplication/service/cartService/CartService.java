@@ -3,7 +3,6 @@ package com.projectApplication.service.cartService;
 import com.projectApplication.entity.cart.CartEntity;
 import com.projectApplication.entity.inventory.StockSkuEntity;
 import com.projectApplication.entity.order.OrderEntity;
-import com.projectApplication.entity.product.ProductSkuEntity;
 import com.projectApplication.dto.cartDataTransfer.CartDto;
 import com.projectApplication.dto.orderDataTransfer.OrderDto;
 import com.projectApplication.repository.InventoryRepository.StockSkuEntityRepository;
@@ -98,12 +97,13 @@ public class CartService {
 
         return cartDtoList;
     }
+
 //---------------------------------------------------------------------------------------------------------------------------
 
     // API to place order....-----------------------------------------------------------.................
 
 
-    private String placeOrder(Long skuCode, Long quantity) {
+    public String placeOrder(Long skuCode, Long quantity) {
 
         /* This API should verify if inventory is available or not. .*/
 
@@ -120,9 +120,6 @@ public class CartService {
                 orderEntityObj.setStatus("Received");
                 orderEntityObj.setQuantity(quantity);
 
-                orderEntityObj.setCartEntityOrder(stockSkuEntityOptional.get()
-                        .getOrderEntity()
-                        .getCartEntityOrder());
                 orderEntityObj.setStockSkuEntityOrder(stockSkuEntityOptional.get()
                         .getProductSkuEntityInStock()
                         .getStockSkuEntity());
@@ -137,26 +134,33 @@ public class CartService {
 
                 stockSkuEntityRepository.save(stockSkuEntityOptional.get());
 
-                //--------------we have to write logic to Once order is placed - inventory should be reduced....----------------
+                //--------------Deleting Cart once order placed ....----------------
 
-                Optional<ProductSkuEntity> productSkuEntityOptional = productSkuEntityRepository.findById(skuCode);
+                Optional<CartEntity> cartEntityOptional = cartRepository.findById(skuCode);
+                if (cartEntityOptional.isPresent()) {
+                    cartRepository.deleteById(cartEntityOptional.get().getSkuCode());
+
+
+                }
+
+                //  Optional<ProductSkuEntity> productSkuEntityOptional = productSkuEntityRepository.findById(skuCode);
 
                 return "Ordered Successfully Placed";
             } else {
                 return "Required Quantity is not Available ";
             }
         }
-        return "Out of Stock ";
+        return "Required Sku is not Exists  ";
     }
 
     // Get OrderStatus.........................................................................
 
-    public OrderDto getOrderStatusDetails(Long orderCode) {
+    public OrderDto getOrderDetails(Long orderCode) {
 
         Optional<OrderEntity> optionalOrderEntity = orderRepository.findById(orderCode);
-
+        OrderDto orderDto = new OrderDto();
         if (optionalOrderEntity.isPresent()) {
-            OrderDto orderDto = new OrderDto();
+
             orderDto.setProductCode(optionalOrderEntity.get().getOrderCode());
             orderDto.setProductName(optionalOrderEntity.get()
                     .getStockSkuEntityOrder()
@@ -172,6 +176,10 @@ public class CartService {
             orderDto.setSkuCode(optionalOrderEntity.get()
                     .getStockSkuEntityOrder()
                     .getSkuCode());
+            orderDto.setSize(optionalOrderEntity.get()
+                    .getStockSkuEntityOrder()
+                    .getProductSkuEntityInStock()
+                    .getSize());
             orderDto.setOrderCode(optionalOrderEntity.get()
                     .getOrderCode());
             orderDto.setPrice(optionalOrderEntity.get()
@@ -183,12 +191,12 @@ public class CartService {
             orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
 
 
-            return orderDto;
+            //return orderDto;
 
         }
 
 
-        return null;
+        return orderDto;
     }
 
 

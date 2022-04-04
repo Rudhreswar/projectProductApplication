@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/inventory")
 public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
@@ -15,8 +16,13 @@ public class InventoryController {
     //Adding stock (Inventory) details..................................................
 
     @RequestMapping(value = "/addStock/{skuCode},{quantity}", method = RequestMethod.POST)
-    public void addStockDetails(@PathVariable("skuCode") Long skuCode, @PathVariable("quantity") Long quantity) {
+    public String addStockDetails(@PathVariable("skuCode") Long skuCode, @PathVariable("quantity") Long quantity) {
 
-        inventoryService.addingStockValues(skuCode, quantity);
+        return inventoryService.addingStockValues(skuCode, quantity);
+    }
+
+    @RequestMapping(value = "/updateStock/{skuCode},{quantity}", method = RequestMethod.PUT)
+    public String updateStock(@PathVariable("skuCode") Long skuCode, @PathVariable("quantity") Long quantity) {
+        return inventoryService.updateStock(skuCode, quantity);
     }
 }

@@ -16,16 +16,6 @@ public class OrderEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private StockSkuEntity stockSkuEntityOrder;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private CartEntity cartEntityOrder;
-
-    public CartEntity getCartEntityOrder() {
-        return cartEntityOrder;
-    }
-
-    public void setCartEntityOrder(CartEntity cartEntityOrder) {
-        this.cartEntityOrder = cartEntityOrder;
-    }
 
     public Long getOrderCode() {
         return orderCode;

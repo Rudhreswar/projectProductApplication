@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+
+@RequestMapping("/cart")
 public class CartController {
     @Autowired
     private CartService cartService;
-
 
 
     // CART   -------------------------------------...............
@@ -31,19 +32,19 @@ public class CartController {
 
     // VIEW ----CART.........................................
     @RequestMapping(value = "/viewCart", method = RequestMethod.GET)
-    public void viewCart() {
-        cartService.viewCart();
+    public List<CartDto> viewCart() {
+        return cartService.viewCart();
     }
 
     // placeOrder...............................
     @RequestMapping(value = "/placeOrder/{skuCode},{quantity}", method = RequestMethod.GET)
-    public List<CartDto> placeOrder(@PathVariable("skuCode") Long skuCode, @PathVariable("quantity") Long quantity) {
-        return cartService.viewCart();
+    public String placeOrder(@PathVariable("skuCode") Long skuCode, @PathVariable("quantity") Long quantity) {
+        return cartService.placeOrder(skuCode, quantity);
     }
 
     //Get  OrderDetails...........................
     @RequestMapping(value = "/orderDetails/{orderCode}", method = RequestMethod.GET)
     public OrderDto orderDetails(@PathVariable("orderCode") Long orderCode) {
-        return cartService.getOrderStatusDetails(orderCode);
+        return cartService.getOrderDetails(orderCode);
     }
 }

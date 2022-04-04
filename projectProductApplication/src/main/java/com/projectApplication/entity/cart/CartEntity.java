@@ -16,16 +16,6 @@ public class CartEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private ProductSkuEntity productSkuEntityCart;
 
-    @OneToOne(mappedBy = "cartEntityOrder", cascade = CascadeType.ALL)
-    private OrderEntity orderEntityCart;
-
-    public OrderEntity getOrderEntityCart() {
-        return orderEntityCart;
-    }
-
-    public void setOrderEntityCart(OrderEntity orderEntityCart) {
-        this.orderEntityCart = orderEntityCart;
-    }
 
     public Long getCartCode() {
         return cartCode;

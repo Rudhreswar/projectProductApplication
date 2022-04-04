@@ -41,18 +41,14 @@ public class FulfilmentService {
 
                 orderRepository.save(optionalOrderEntity.get());
                 ProcessingEntity processingEntityObj = new ProcessingEntity();
+                processingEntityObj.setOrderCode(optionalOrderEntity.get().getOrderCode());
+                processingEntityObj.setStatus(optionalOrderEntity.get().getStatus());
                 productionEntityRepository.save(processingEntityObj);
                 OrderDto orderDto = new OrderDto();
                 orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
                 orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
-                orderDto.setPrice(optionalOrderEntity.get().getCartEntityOrder()
-                        .getProductSkuEntityCart()
-                        .getCartEntityInSku()
-                        .getProductSkuEntityCart()
-                        .getCartEntityInSku()
-                        .getProductSkuEntityCart()
-                        .getProductSkuEntity()
-                        .getPrice());
+                orderDto.setPrice(optionalOrderEntity.get().getStockSkuEntityOrder()
+                        .getProductSkuEntityInStock().getProductSkuEntity().getPrice());
                 orderDto.setDescription(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
@@ -65,8 +61,8 @@ public class FulfilmentService {
                         .getProductsEntitySku()
                         .getProductName());
                 orderDto.setProductCode(optionalOrderEntity.get()
-                        .getCartEntityOrder()
-                        .getProductSkuEntityCart()
+                        .getStockSkuEntityOrder()
+                        .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getProductCode());
 
@@ -89,19 +85,17 @@ public class FulfilmentService {
             if (optionalOrderEntity.get().getStatus().equalsIgnoreCase("processing")) {
                 optionalOrderEntity.get().setStatus("Packing");
                 orderRepository.save(optionalOrderEntity.get());
+
                 PackingEntity packingEntityObj = new PackingEntity();
+                packingEntityObj.setOrderCode(optionalOrderEntity.get().getOrderCode());
+                packingEntityObj.setStatus(optionalOrderEntity.get().getStatus());
                 packingEntityRepository.save(packingEntityObj);
                 OrderDto orderDto = new OrderDto();
                 orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
                 orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
-                orderDto.setPrice(optionalOrderEntity.get().getCartEntityOrder()
-                        .getProductSkuEntityCart()
-                        .getCartEntityInSku()
-                        .getProductSkuEntityCart()
-                        .getCartEntityInSku()
-                        .getProductSkuEntityCart()
-                        .getProductSkuEntity()
-                        .getPrice());
+                orderDto.setPrice(optionalOrderEntity.get().getStockSkuEntityOrder()
+                        .getProductSkuEntityInStock().getProductSkuEntity().getPrice());
+
                 orderDto.setDescription(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
@@ -114,10 +108,11 @@ public class FulfilmentService {
                         .getProductsEntitySku()
                         .getProductName());
                 orderDto.setProductCode(optionalOrderEntity.get()
-                        .getCartEntityOrder()
-                        .getProductSkuEntityCart()
+                        .getStockSkuEntityOrder()
+                        .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getProductCode());
+
 
                 return "YOUR ODER IS PACKING.........!";
             }
@@ -138,20 +133,18 @@ public class FulfilmentService {
             if (optionalOrderEntity.get().getStatus().equalsIgnoreCase("packing")) {
                 optionalOrderEntity.get().setStatus("shipping");
                 orderRepository.save(optionalOrderEntity.get());
-                ShippingEntity shippingEntity = new ShippingEntity();
 
-                shippingEntityRepository.save(shippingEntity);
+                ShippingEntity shippingEntityObj = new ShippingEntity();
+                shippingEntityObj.setOrderCode(optionalOrderEntity.get().getOrderCode());
+                shippingEntityObj.setStatus(optionalOrderEntity.get().getStatus());
+
+                shippingEntityRepository.save(shippingEntityObj);
+
                 OrderDto orderDto = new OrderDto();
                 orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
                 orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
-                orderDto.setPrice(optionalOrderEntity.get().getCartEntityOrder()
-                        .getProductSkuEntityCart()
-                        .getCartEntityInSku()
-                        .getProductSkuEntityCart()
-                        .getCartEntityInSku()
-                        .getProductSkuEntityCart()
-                        .getProductSkuEntity()
-                        .getPrice());
+                orderDto.setPrice(optionalOrderEntity.get().getStockSkuEntityOrder()
+                        .getProductSkuEntityInStock().getProductSkuEntity().getPrice());
                 orderDto.setDescription(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
@@ -164,8 +157,8 @@ public class FulfilmentService {
                         .getProductsEntitySku()
                         .getProductName());
                 orderDto.setProductCode(optionalOrderEntity.get()
-                        .getCartEntityOrder()
-                        .getProductSkuEntityCart()
+                        .getStockSkuEntityOrder()
+                        .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getProductCode());
 
@@ -189,18 +182,15 @@ public class FulfilmentService {
                 orderRepository.save(optionalOrderEntity.get());
                 DeliveringEntity deliveringEntityObj = new DeliveringEntity();
 
+                deliveringEntityObj.setOrderCode(optionalOrderEntity.get().getOrderCode());
+                deliveringEntityObj.setStatus(optionalOrderEntity.get().getStatus());
+
                 deliveringEntityRepository.save(deliveringEntityObj);
                 OrderDto orderDto = new OrderDto();
                 orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
                 orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
-                orderDto.setPrice(optionalOrderEntity.get().getCartEntityOrder()
-                        .getProductSkuEntityCart()
-                        .getCartEntityInSku()
-                        .getProductSkuEntityCart()
-                        .getCartEntityInSku()
-                        .getProductSkuEntityCart()
-                        .getProductSkuEntity()
-                        .getPrice());
+                orderDto.setPrice(optionalOrderEntity.get().getStockSkuEntityOrder()
+                        .getProductSkuEntityInStock().getProductSkuEntity().getPrice());
                 orderDto.setDescription(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
@@ -215,12 +205,12 @@ public class FulfilmentService {
                         .getProductsEntitySku()
                         .getProductName());
                 orderDto.setProductCode(optionalOrderEntity.get()
-                        .getCartEntityOrder()
-                        .getProductSkuEntityCart()
+                        .getStockSkuEntityOrder()
+                        .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getProductCode());
 
-                return " YOUR ORDER IS DELIVERING..............";
+                return " YOUR ORDER IS DELIVERED..............";
             }
             return "ORDER IS NOT ABLE TO DELIVER";
         }
@@ -235,23 +225,20 @@ public class FulfilmentService {
 
         if (optionalOrderEntity.isPresent()) {
             if (optionalOrderEntity.get().getStatus().equalsIgnoreCase("delivered")) {
-                optionalOrderEntity.get().setStatus("returning");
+                optionalOrderEntity.get().setStatus("returned");
                 orderRepository.save(optionalOrderEntity.get());
 
                 ReturningEntity returningEntityObj = new ReturningEntity();
+
+                returningEntityObj.setOrderCode(optionalOrderEntity.get().getOrderCode());
+                returningEntityObj.setStatus(optionalOrderEntity.get().getStatus());
 
                 returningEntityRepository.save(returningEntityObj);
                 OrderDto orderDto = new OrderDto();
                 orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
                 orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
-                orderDto.setPrice(optionalOrderEntity.get().getCartEntityOrder()
-                        .getProductSkuEntityCart()
-                        .getCartEntityInSku()
-                        .getProductSkuEntityCart()
-                        .getCartEntityInSku()
-                        .getProductSkuEntityCart()
-                        .getProductSkuEntity()
-                        .getPrice());
+                orderDto.setPrice(optionalOrderEntity.get().getStockSkuEntityOrder()
+                        .getProductSkuEntityInStock().getProductSkuEntity().getPrice());
                 orderDto.setDescription(optionalOrderEntity.get()
                         .getStockSkuEntityOrder()
                         .getProductSkuEntityInStock()
@@ -266,8 +253,8 @@ public class FulfilmentService {
                         .getProductsEntitySku()
                         .getProductName());
                 orderDto.setProductCode(optionalOrderEntity.get()
-                        .getCartEntityOrder()
-                        .getProductSkuEntityCart()
+                        .getStockSkuEntityOrder()
+                        .getProductSkuEntityInStock()
                         .getProductsEntitySku()
                         .getProductCode());
 

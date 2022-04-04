@@ -34,26 +34,28 @@ public class ProductService {
     }
 
     // Adding Sku details ...........................
-    public void addingSkuDetails(ProductSkuDto productSkuDto, Long productCode) {
+    public void addingSkuDetails(Long productCode, ProductSkuDto productSkuDto) {
         Optional<ProductsEntity> productsEntityOptional = productsEntityRepository.findById(productCode);
 
         if (productsEntityOptional.isPresent()) {
             productsEntityOptional.stream().forEach(product -> {
 
-                        ProductSkuEntity productSkuEntityObj = new ProductSkuEntity();
-                        productSkuEntityObj.setProductsEntitySku(product);
-                        productSkuEntityObj.setSize(productSkuDto.getSize());
+                ProductSkuEntity productSkuEntityObj = new ProductSkuEntity();
+                productSkuEntityObj.setProductsEntitySku(product);
+                productSkuEntityObj.setSize(productSkuDto.getSize());
 
-                        //Saving Sku data to repository.......................
-                        productSkuEntityRepository.save(productSkuEntityObj);
+                //Saving Sku data to repository.......................
+                productSkuEntityRepository.save(productSkuEntityObj);
 
-                        PriceForEachSkuEntity priceForEachSkuEntityObj = new PriceForEachSkuEntity();
-                        priceForEachSkuEntityObj.setProductSkuEntityPrice(productSkuEntityObj);
-                        priceForEachSkuEntityObj.setPrice(productSkuDto.getPrice());
+                PriceForEachSkuEntity priceForEachSkuEntityObj = new PriceForEachSkuEntity();
+                priceForEachSkuEntityObj.setProductSkuEntityPrice(productSkuEntityObj);
+                priceForEachSkuEntityObj.setPrice(productSkuDto.getPrice());
+
+                //saving to price Repository...................
+                priceForEachSKUEntityRepository.save(priceForEachSkuEntityObj);
 
 
-                    }
-            );
+            });
         }
     }
 }
