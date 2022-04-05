@@ -37,7 +37,7 @@ public class CartController {
     }
 
     // placeOrder...............................
-    @RequestMapping(value = "/placeOrder/{skuCode},{quantity}", method = RequestMethod.GET)
+    @RequestMapping(value = "/placeOrder/{skuCode},{quantity}", method = RequestMethod.POST)
     public String placeOrder(@PathVariable("skuCode") Long skuCode, @PathVariable("quantity") Long quantity) {
         return cartService.placeOrder(skuCode, quantity);
     }

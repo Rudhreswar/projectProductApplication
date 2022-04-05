@@ -186,6 +186,7 @@ public class FulfilmentService {
                 deliveringEntityObj.setStatus(optionalOrderEntity.get().getStatus());
 
                 deliveringEntityRepository.save(deliveringEntityObj);
+
                 OrderDto orderDto = new OrderDto();
                 orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
                 orderDto.setOrderCode(optionalOrderEntity.get().getOrderCode());
@@ -262,6 +263,6 @@ public class FulfilmentService {
             }
             return "UNABLE TO RETURN THE ORDER";
         }
-        return "THE PRODUCT WITH THIS ORDER CODE : " + optionalOrderEntity.get().getOrderCode() + "DOES NOT EXISTS.";
+        return "THE PRODUCT WITH THIS ORDER CODE : " + optionalOrderEntity.get().getOrderCode() + "  DOES NOT EXISTS.";
     }
 }

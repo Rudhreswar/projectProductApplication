@@ -13,6 +13,9 @@ public class OrderDto {
     private Long skuCode;
     private String size;
     private Long orderCode;
+    private String status;
+
+
     private double price;
     private Long quantity;
 
@@ -31,6 +34,7 @@ public class OrderDto {
         this.quantity = quantity;
 
     }
+
 
     // set & get values Through the Setters and Getters ..................................
 
@@ -88,6 +92,14 @@ public class OrderDto {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Long getQuantity() {

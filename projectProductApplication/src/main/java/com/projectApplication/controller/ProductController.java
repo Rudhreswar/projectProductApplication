@@ -18,18 +18,20 @@ public class ProductController {
     //Adding Complete Details for Products..........................................
 
     @RequestMapping(value = "/addProducts", method = RequestMethod.POST)
-    public void addProductDetails(@RequestBody ProductsDto productsDto) {
+    public String addProductDetails(@RequestBody ProductsDto productsDto) {
 
         productService.addProduct(productsDto);
 
+        return "Product Added Successfully";
     }
 
     //Adding Skus details....................................................
 
     @RequestMapping(value = "/{productCode}/addSkus", method = RequestMethod.POST)
-    public void addSkuDetails(
+    public String addSkuDetails(
             @PathVariable("productCode") Long productCode, @RequestBody ProductSkuDto productSkuDto) {
         productService.addingSkuDetails(productCode, productSkuDto);
+        return "Sku added Successfully";
     }
 
 

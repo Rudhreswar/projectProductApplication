@@ -10,10 +10,9 @@ public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartCode;
-    private Long skuCode;
     private Long quantity;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private ProductSkuEntity productSkuEntityCart;
 
 
@@ -21,13 +20,6 @@ public class CartEntity {
         return cartCode;
     }
 
-    public Long getSkuCode() {
-        return skuCode;
-    }
-
-    public void setSkuCode(Long skuCode) {
-        this.skuCode = skuCode;
-    }
 
     public Long getQuantity() {
         return quantity;

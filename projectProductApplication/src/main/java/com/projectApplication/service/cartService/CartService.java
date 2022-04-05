@@ -39,7 +39,6 @@ public class CartService {
             if (stocksSkuEntityOptional.get().getQuantityAvailable() >= quantity) {
 
                 CartEntity cartEntityObj = new CartEntity();
-                cartEntityObj.setSkuCode(skuCode);
                 cartEntityObj.setQuantity(quantity);
                 cartEntityObj.setProductSkuEntityCart(stocksSkuEntityOptional.get()
                         .getProductSkuEntityInStock());
@@ -82,7 +81,7 @@ public class CartService {
             cartDtoObj.setDescription(cart.getProductSkuEntityCart()
                     .getProductsEntitySku()
                     .getDescription());
-            cartDtoObj.setSkuCode(cart.getSkuCode());
+            cartDtoObj.setSkuCode(cart.getProductSkuEntityCart().getSkuCode());
             cartDtoObj.setSize(cart.getProductSkuEntityCart().getSize());
             cartDtoObj.setOrderCode(cart.getCartCode());
             cartDtoObj.setPrice(cart.getProductSkuEntityCart()
@@ -136,10 +135,10 @@ public class CartService {
 
                 //--------------Deleting Cart once order placed ....----------------
 
-                Optional<CartEntity> cartEntityOptional = cartRepository.findById(skuCode);
-                if (cartEntityOptional.isPresent()) {
-                    cartRepository.deleteById(cartEntityOptional.get().getSkuCode());
 
+                Optional<CartEntity> cartEntityOptional = cartRepository.findById(stockSkuEntityOptional.get().getSkuCode());
+                if (cartEntityOptional.isPresent()) {
+                    cartRepository.deleteById(cartEntityOptional.get().getProductSkuEntityCart().getSkuCode());
 
                 }
 
@@ -187,11 +186,12 @@ public class CartService {
                     .getProductSkuEntityInStock()
                     .getProductSkuEntity()
                     .getPrice());
+            orderDto.setStatus(optionalOrderEntity.get().getStatus());
 
             orderDto.setQuantity(optionalOrderEntity.get().getQuantity());
 
 
-            //return orderDto;
+            return orderDto;
 
         }
 

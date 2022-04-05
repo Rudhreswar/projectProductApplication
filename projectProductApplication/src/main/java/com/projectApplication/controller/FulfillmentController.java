@@ -19,21 +19,21 @@ public class FulfillmentController {
     // Checking the status of the Order.............
 
     // Processing................
-    @RequestMapping(value = "/processing/{orderCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/processing/{orderCode}", method = RequestMethod.POST)
     public String processing(@PathVariable("orderCode") Long orderCode) {
 
         return fulfilmentService.processing(orderCode);
     }
 
     // Packing...................
-    @RequestMapping(value = "/packing/{orderCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/packing/{orderCode}", method = RequestMethod.POST)
     public String packing(@PathVariable("orderCode") Long orderCode) {
         return fulfilmentService.packing(orderCode);
     }
 
     // Shipping....................
 
-    @RequestMapping(value = "/shipping/{orderCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/shipping/{orderCode}", method = RequestMethod.POST)
     public String shipping(@PathVariable("orderCode") Long orderCode) {
 
         return fulfilmentService.shipping(orderCode);
@@ -41,13 +41,13 @@ public class FulfillmentController {
     }
 
     // Delivering..........................
-    @RequestMapping(value = "/delivering/{orderCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delivering/{orderCode}", method = RequestMethod.POST)
     public String delivering(@PathVariable("orderCode") Long orderCode) {
         return fulfilmentService.delivering(orderCode);
     }
 
     // Returning ...........................
-    @RequestMapping(value = "/returning/{orderCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/returning/{orderCode}", method = RequestMethod.POST)
     public String returning(@PathVariable("orderCode") Long orderCode) {
         return fulfilmentService.returning(orderCode);
     }
